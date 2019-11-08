@@ -1,27 +1,74 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
+const statusBarCommandId = 'extension.beginFluxTimer';
+let statusBarItem: vscode.StatusBarItem;
+let interval: NodeJS.Timeout;
+let isPaused: boolean = false;
+let hasStarted: boolean = false;
+let fluxMinutes = 25;
+let deadline: Date;
+
 export function activate(context: vscode.ExtensionContext) {
+  console.log('Congratulations, your extension "flux" is now active!');
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "flux" is now active!');
+  let command = vscode.commands.registerCommand(statusBarCommandId, () => {
+    if (hasStarted) {
+      return;
+    }
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('extension.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
+    deadline = new Date(new Date().getTime() + fluxMinutes * 60000);
+    updateTimerValue();
 
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World!');
-	});
+    interval = setInterval(() => {
+      if (!isPaused) {
+        updateTimerValue();
+      }
+    }, 1000);
 
-	context.subscriptions.push(disposable);
+    hasStarted = true;
+    vscode.window.showInformationMessage('Your Flux Timer Has Started');
+  });
+
+  context.subscriptions.push(command);
+
+  vscode.commands.registerCommand('extension.flux', () => {
+    initializeStatusBarItem();
+    context.subscriptions.push(statusBarItem);
+  });
 }
 
-// this method is called when your extension is deactivated
+function initializeStatusBarItem() {
+  statusBarItem = vscode.window.createStatusBarItem(
+    vscode.StatusBarAlignment.Left,
+    1
+  );
+  statusBarItem.text = `$(watch) Click to Start Flux Timer`;
+  statusBarItem.command = statusBarCommandId;
+  statusBarItem.show();
+}
+
+function updateTimerValue() {
+  const timeRemaining = getTimeRemaining(deadline);
+
+  if (timeRemaining.total < 0) {
+    clearInterval(interval);
+    hasStarted = false;
+    vscode.window.showInformationMessage('Time to take a break');
+  } else {
+    statusBarItem.text = `$(watch) ${timeRemaining.minutes}:${timeRemaining.seconds}`;
+  }
+}
+
+function getTimeRemaining(endTime: any) {
+  let t = Date.parse(endTime) - Date.parse(new Date().toString());
+  let seconds = Math.floor((t / 1000) % 60);
+  let minutes = Math.floor((t / 1000 / 60) % 60);
+
+  return {
+    total: t,
+    minutes: minutes.toString().padStart(2, '0'),
+    seconds: seconds.toString().padStart(2, '0')
+  };
+}
+
 export function deactivate() {}
