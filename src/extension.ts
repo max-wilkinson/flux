@@ -1,8 +1,7 @@
 import * as vscode from 'vscode';
 import Timer from './timer';
+import { Widget, StatusBarCommandId } from './widget';
 
-const statusBarCommandId = 'extension.beginFluxTimer';
-let statusBarItem: vscode.StatusBarItem;
 let interval: NodeJS.Timeout;
 let isPaused: boolean = false;
 let hasStarted: boolean = false;
@@ -12,7 +11,7 @@ let timer: Timer;
 export function activate(context: vscode.ExtensionContext) {
   console.log('Congratulations, your extension "flux" is now active!');
 
-  let command = vscode.commands.registerCommand(statusBarCommandId, () => {
+  let command = vscode.commands.registerCommand(StatusBarCommandId, () => {
     if (hasStarted) {
       isPaused = !isPaused;
     } else {
@@ -23,19 +22,8 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(command);
 
   vscode.commands.registerCommand('extension.flux', () => {
-    initializeStatusBarItem();
-    context.subscriptions.push(statusBarItem);
+    context.subscriptions.push(Widget.Instance.statusBarItem);
   });
-}
-
-function initializeStatusBarItem() {
-  statusBarItem = vscode.window.createStatusBarItem(
-    vscode.StatusBarAlignment.Left,
-    1
-  );
-  statusBarItem.text = `$(watch) Click to Start Flux Timer`;
-  statusBarItem.command = statusBarCommandId;
-  statusBarItem.show();
 }
 
 function beginTimer() {
@@ -64,7 +52,7 @@ function updateTimerValue(timeRemaining: any) {
   if (timeRemaining.total < 0) {
     endTimer();
   } else {
-    statusBarItem.text = `$(watch) ${timeRemaining.minutes}:${timeRemaining.seconds}`;
+    Widget.Instance.statusBarItem.text = `$(watch) ${timeRemaining.minutes}:${timeRemaining.seconds}`;
   }
 }
 
