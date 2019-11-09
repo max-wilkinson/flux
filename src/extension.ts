@@ -1,12 +1,12 @@
 import * as vscode from 'vscode';
+import { Timer } from './timer';
 
 const statusBarCommandId = 'extension.beginFluxTimer';
 let statusBarItem: vscode.StatusBarItem;
 let interval: NodeJS.Timeout;
 let isPaused: boolean = false;
 let hasStarted: boolean = false;
-let fluxMinutes = 25;
-let deadline: Date;
+let fluxMinutes = 1;
 
 export function activate(context: vscode.ExtensionContext) {
   console.log('Congratulations, your extension "flux" is now active!');
@@ -16,12 +16,14 @@ export function activate(context: vscode.ExtensionContext) {
       return;
     }
 
-    deadline = new Date(new Date().getTime() + fluxMinutes * 60000);
-    updateTimerValue();
+    const timer = new Timer(fluxMinutes);
+    const timeRemaining = timer.getTimeRemaining();
+    updateTimerValue(timeRemaining);
 
     interval = setInterval(() => {
       if (!isPaused) {
-        updateTimerValue();
+        const timeRemaining = timer.getTimeRemaining();
+        updateTimerValue(timeRemaining);
       }
     }, 1000);
 
@@ -47,28 +49,14 @@ function initializeStatusBarItem() {
   statusBarItem.show();
 }
 
-function updateTimerValue() {
-  const timeRemaining = getTimeRemaining(deadline);
-
+function updateTimerValue(timeRemaining: any) {
   if (timeRemaining.total < 0) {
     clearInterval(interval);
     hasStarted = false;
-    vscode.window.showInformationMessage('Time to take a break');
+    vscode.window.showInformationMessage('Time to Take a Break');
   } else {
     statusBarItem.text = `$(watch) ${timeRemaining.minutes}:${timeRemaining.seconds}`;
   }
-}
-
-function getTimeRemaining(endTime: any) {
-  let t = Date.parse(endTime) - Date.parse(new Date().toString());
-  let seconds = Math.floor((t / 1000) % 60);
-  let minutes = Math.floor((t / 1000 / 60) % 60);
-
-  return {
-    total: t,
-    minutes: minutes.toString().padStart(2, '0'),
-    seconds: seconds.toString().padStart(2, '0')
-  };
 }
 
 export function deactivate() {}
