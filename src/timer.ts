@@ -1,19 +1,27 @@
+import * as moment from 'moment';
+
 export class Timer {
-  endTime: Date;
+  duration: moment.Duration;
 
   constructor(minutes: number) {
-    this.endTime = new Date(new Date().getTime() + minutes * 60000);
+    this.duration = moment.duration(minutes, 'minutes');
   }
 
   getTimeRemaining() {
-    let t = this.endTime.getTime() - new Date().getTime();
-    let seconds = Math.floor((t / 1000) % 60);
-    let minutes = Math.floor((t / 1000 / 60) % 60);
-
-    return {
-      total: t,
-      minutes: minutes.toString().padStart(2, '0'),
-      seconds: seconds.toString().padStart(2, '0')
+    const timeRemaining = {
+      total: this.duration.asMilliseconds(),
+      minutes: this.duration
+        .minutes()
+        .toString()
+        .padStart(2, '0'),
+      seconds: this.duration
+        .seconds()
+        .toString()
+        .padStart(2, '0')
     };
+
+    this.duration.subtract(1, 'second');
+
+    return timeRemaining;
   }
 }
