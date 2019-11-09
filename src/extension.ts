@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { Timer } from './timer';
+import Timer from './timer';
 
 const statusBarCommandId = 'extension.beginFluxTimer';
 let statusBarItem: vscode.StatusBarItem;

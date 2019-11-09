@@ -1,6 +1,6 @@
 import { duration, Duration } from 'moment';
 
-export class Timer {
+export default class Timer {
   duration: Duration;
 
   constructor(minutes: number) {
