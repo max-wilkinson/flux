@@ -1,10 +1,10 @@
-import * as moment from 'moment';
+import { duration, Duration } from 'moment';
 
 export class Timer {
-  duration: moment.Duration;
+  duration: Duration;
 
   constructor(minutes: number) {
-    this.duration = moment.duration(minutes, 'minutes');
+    this.duration = duration(minutes, 'minutes');
   }
 
   getTimeRemaining() {
