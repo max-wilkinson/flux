@@ -33,6 +33,7 @@ export default class TimerService {
     clearInterval(interval);
     this.hasStarted = false;
     window.showInformationMessage('Time to Take a Break');
+    Widget.Instance.statusBarItem.text = `$(watch) 00:00 - Click to Restart Flux Timer`;
   }
 
   updateTimerValue(timeRemaining: any) {
