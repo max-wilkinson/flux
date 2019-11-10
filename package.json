@@ -19,7 +19,26 @@
         "command": "extension.flux",
         "title": "Flux"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Flux",
+      "properties": {
+        "flux.rhythm": {
+          "type": "string",
+          "description": "Select a rhythm for your flux timer.",
+          "enumDescriptions": [
+            "Pomodoro (25 minutes)",
+            "Desktime (52 minutes)",
+            "Ultradian (90 minutes)"
+          ],
+          "enum": [
+            "Pomodoro",
+            "Desktime",
+            "Ultradian"
+          ]
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",

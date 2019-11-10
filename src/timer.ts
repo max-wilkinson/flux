@@ -14,18 +14,24 @@ export default class Timer {
   getTimeRemaining() {
     const timeRemaining = {
       total: this.duration.asMilliseconds(),
-      minutes: this.duration
-        .minutes()
-        .toString()
-        .padStart(2, '0'),
-      seconds: this.duration
-        .seconds()
-        .toString()
-        .padStart(2, '0')
+      minutes: this.getMinutes(),
+      seconds: this.getSeconds()
     };
 
     this.duration.subtract(1, 'second');
 
     return timeRemaining;
+  }
+
+  private getMinutes() {
+    const minutes = this.duration.hours() * 60 + this.duration.minutes();
+    return minutes.toString().padStart(2, '0');
+  }
+
+  private getSeconds() {
+    return this.duration
+      .seconds()
+      .toString()
+      .padStart(2, '0');
   }
 }
