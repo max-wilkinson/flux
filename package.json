@@ -1,7 +1,20 @@
 {
   "name": "flux",
-  "displayName": "flux",
+  "displayName": "Flux",
   "description": "A flexible timer for establishing your working rhythm",
+  "keywords": [
+    "timer",
+    "rhythm",
+    "pomodoro",
+    "desktime",
+    "ultradian"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/max-wilkinson/flux"
+  },
+  "publisher": "FordLabs",
+  "preview": true,
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.40.0"
