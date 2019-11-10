@@ -3,7 +3,11 @@ import { duration, Duration } from 'moment';
 export default class Timer {
   duration: Duration;
 
-  constructor(minutes: number) {
+  constructor() {
+    this.duration = duration();
+  }
+
+  setTimeRemaining(minutes: number) {
     this.duration = duration(minutes, 'minutes');
   }
 
