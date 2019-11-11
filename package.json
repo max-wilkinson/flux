@@ -11,6 +11,10 @@
     "ultradian"
   ],
   "icon": "images/FluxIcon.png",
+  "galleryBanner": {
+    "color": "#7E66C2",
+    "theme": "dark"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/max-wilkinson/flux"
