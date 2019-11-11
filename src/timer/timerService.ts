@@ -1,5 +1,5 @@
 import { window, workspace } from 'vscode';
-import { Widget } from './widget';
+import { Widget } from '../widget';
 import Timer from './timer';
 
 let interval: NodeJS.Timeout;
@@ -49,7 +49,7 @@ export default class TimerService {
     const rhythm = workspace.getConfiguration('flux').get('rhythm');
     switch (rhythm) {
       case 'Pomodoro':
-        return 25;
+        return 1;
       case 'Desktime':
         return 52;
       case 'Ultradian':

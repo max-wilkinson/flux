@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import TimerService from './timerService';
+import TimerService from './timer/timerService';
 import { Widget, StatusBarCommandId } from './widget';
 
 let timerService = new TimerService();
