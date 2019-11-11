@@ -49,7 +49,7 @@ export default class TimerService {
     const rhythm = workspace.getConfiguration('flux').get('rhythm');
     switch (rhythm) {
       case 'Pomodoro':
-        return 1;
+        return 25;
       case 'Desktime':
         return 52;
       case 'Ultradian':
