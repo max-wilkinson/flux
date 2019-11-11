@@ -10,7 +10,7 @@
     "desktime",
     "ultradian"
   ],
-  "icon": "FluxIcon.png",
+  "icon": "images/FluxIcon.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/max-wilkinson/flux"
