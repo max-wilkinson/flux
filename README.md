@@ -1,65 +1,57 @@
-# flux README
+![A FordLabs Product](images/FluxHero.png)
 
-This is the README for your extension "flux". After writing up a brief description, we recommend including the following sections.
+# Flux
+
+Flux is a flexible timer for establishing your working rhythm.
+
+## Background
+
+Psychology defines _flow_ as the mental state in which you are fully immersed in an activity. This is sometimes referred to as being "in the zone." Managing your flow is an important part of optimizing your productivity.
+
+Over the years, three different work rhythms have emerged in pursuit of managing flow: Pomodoro, Desktime, and Ultradian.
+
+1. Pomodoro utilizes 25 minutes of work with a 5 minute break.
+2. Desktime utilizes 52 minutes of work with a 17 minutes break.
+3. Ultradian utilizes 90 minutes of work with an extended break.
+
+This extension provides a timer that can be configured to operate at any of these rhythms.
+
+> Tip: This [blog post](https://medium.com/@timmetz/pomodoro-technique-and-other-work-rhythms-which-one-suits-you-34c2d05fe46e) provides a great overview of these work rhythms.
+
+## Getting Started
+
+To get started, activate this extension by running the VS Code command `Flux`.
+
+> Hint: To run a command in VS Code hit **cmd/ctrl + shift + p**
+
+This will create an item on the left side of your status bar. Click the item when you are ready to begin the timer.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+### Pausing
 
-For example if there is an image subfolder under your extension project workspace:
+Clicking the timer while it is running will pause/unpause it.
 
-\!\[feature X\]\(images/feature-x.png\)
+### Configure your working rhythm
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+Flux provides a rhythm setting that will allow you to select between the Pomodoro, Desktime, and Ultradian rhythms.
 
 ## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
+This extension is designed to work right out of the box.
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
+Flux is in public beta. We are hard at work creating the best experience possible for this extension. If you have any feedback, feel free to submit an issue to this repository.
 
-### 1.0.0
+### 0.0.1
 
-Initial release of ...
+Initial release of Flux
 
-### 1.0.1
+## License
 
-Fixed issue #.
+Flux is licensed under the Apache License 2.0. See [LICENSE](LICENSE) for details.
 
-### 1.1.0
+## Attribution
 
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+Hourglass icon made by [Smashicons](https://smashicons.com/) from [flaticon](https://www.flaticon.com/)
