@@ -6,17 +6,15 @@ let interval: NodeJS.Timeout;
 
 export default class TimerService {
   timer: Timer;
-  fluxMinutes: number;
   hasStarted: boolean = false;
   isPaused: boolean = false;
 
   constructor() {
     this.timer = new Timer();
-    this.fluxMinutes = this.getConfiguredTime();
   }
 
   beginTimer() {
-    this.timer.setTimeRemaining(this.fluxMinutes);
+    this.timer.setTimeRemaining(this.getConfiguredTime());
     this.updateTimerValue(this.timer.getTimeRemaining());
 
     interval = setInterval(() => {
@@ -30,19 +28,23 @@ export default class TimerService {
     window.showInformationMessage('Your Flux Timer Has Started');
   }
 
-  updateTimerValue(timeRemaining: any) {
+  resetTimer() {
+    clearInterval(interval);
+    this.hasStarted = false;
+  }
+
+  private endTimer() {
+    this.resetTimer();
+    window.showInformationMessage('Time to Take a Break');
+    Widget.Instance.statusBarItem.text = `$(watch) 00:00 - Click to Restart Flux Timer`;
+  }
+
+  private updateTimerValue(timeRemaining: any) {
     if (timeRemaining.total < 0) {
       this.endTimer();
     } else {
       Widget.Instance.statusBarItem.text = `$(watch) ${timeRemaining.minutes}:${timeRemaining.seconds}`;
     }
-  }
-
-  private endTimer() {
-    clearInterval(interval);
-    this.hasStarted = false;
-    window.showInformationMessage('Time to Take a Break');
-    Widget.Instance.statusBarItem.text = `$(watch) 00:00 - Click to Restart Flux Timer`;
   }
 
   private getConfiguredTime(): number {

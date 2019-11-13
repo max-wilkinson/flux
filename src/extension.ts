@@ -20,6 +20,11 @@ export function activate(context: ExtensionContext) {
   commands.registerCommand('extension.flux', () => {
     context.subscriptions.push(Widget.Instance.statusBarItem);
   });
+
+  commands.registerCommand('extension.resetFlux', () => {
+    timerService.resetTimer();
+    Widget.Instance.statusBarItem.text = `$(watch) Click to Start Flux Timer`;
+  });
 }
 
 export function deactivate() {}

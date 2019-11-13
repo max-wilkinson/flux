@@ -32,9 +32,15 @@ This will create an item on the left side of your status bar. Click the item whe
 
 Clicking the timer while it is running will pause/unpause it.
 
+### Resetting
+
+To reset the timer, run the VS Code command `Reset Flux`.
+
 ### Configure your working rhythm
 
 Flux provides a rhythm setting that will allow you to select between the Pomodoro, Desktime, and Ultradian rhythms.
+
+> Hint: Flux will detect your configured rhythm upon extension activation, as well as when you run the reset command.
 
 ## Requirements
 

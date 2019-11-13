@@ -37,6 +37,10 @@
       {
         "command": "extension.flux",
         "title": "Flux"
+      },
+      {
+        "command": "extension.resetFlux",
+        "title": "Reset Flux"
       }
     ],
     "configuration": {
