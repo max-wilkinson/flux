@@ -1,13 +1,13 @@
-import * as vscode from 'vscode';
+import { ExtensionContext, commands } from 'vscode';
 import TimerService from './timer/timerService';
 import { Widget, StatusBarCommandId } from './widget';
 
 let timerService = new TimerService();
 
-export function activate(context: vscode.ExtensionContext) {
+export function activate(context: ExtensionContext) {
   console.log('Congratulations, your extension "flux" is now active!');
 
-  let command = vscode.commands.registerCommand(StatusBarCommandId, () => {
+  let command = commands.registerCommand(StatusBarCommandId, () => {
     if (timerService.hasStarted) {
       timerService.isPaused = !timerService.isPaused;
     } else {
@@ -17,7 +17,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   context.subscriptions.push(command);
 
-  vscode.commands.registerCommand('extension.flux', () => {
+  commands.registerCommand('extension.flux', () => {
     context.subscriptions.push(Widget.Instance.statusBarItem);
   });
 }
